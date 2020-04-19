@@ -1,7 +1,7 @@
 \documentclass[../journal.tex]{subfiles}
-\graphicspath{{Figs/5_1/}{../Figs/5_1/}}  %Path from main  and path from this file til graphics
+\graphicspath{{Figs/3_1/}{../Figs/3_1/}}  %Path from main  and path from this file til graphics
 
-% --Source input--
+% Source input
 % \begin{table}[H]
 %     \centering
 %       \framebox{
@@ -15,6 +15,8 @@
 % Pictures{name of file}{size compared to page}{captions}{label}
 % \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
 
+
+
 %-----------DOCUMENT--------------
 
 \begin{document}
@@ -22,47 +24,50 @@
 \subsection{Introduktion}
 
 \subsection{Design og implementering}
+Vi har ikke inkluderet multiplexerne, da disse er ret lige til
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/5/mylatch.vhd}
+  }
+  \caption{mylatch design}	
+  \label{src:mylatch}
+\end{table}
 
 \begin{table}[H]
     \centering
       \framebox{
         \rule{8pt}{0pt}
-          \lstinputlisting[firstline=1,lastline=9]{../src/5/bin2hex.vhd}
+          \lstinputlisting{../src/5/compare_logic.vhd}
   }
-  \caption{Entity for bin2hex.vhd}	
-  \label{src:bin2hex_ent}
+  \caption{x}
+  \label{src:compare_logic}
 \end{table}
-
-s
-\begin{table}[H]
-    \centering
-        \framebox{
-        \rule{8pt}{0pt}
-            \lstinputlisting[firstline=11,lastline=35]
-            {../src/5/bin2hex.vhd}
-    }
-    \caption{Architechture for bin2hex.vhd}	
-    \label{src:bin2hex_arch}
-\end{table}
-
 
 \begin{table}[H]
     \centering
-        \framebox{
+      \framebox{
         \rule{8pt}{0pt}
-            \lstinputlisting
-            {../src/5/bin2hex_test.vhd}
-    }
-    \caption{Design af testbench for bin2hex}	
-    \label{src:bin2hex_test}
+          \lstinputlisting{../src/5/guess_game.vhd}
+  }
+  \caption{Guess Game design}	
+  \label{src:guess_game}
+\end{table}
+
+\begin{table}[H]
+  \centering
+    \framebox{
+      \rule{8pt}{0pt}
+        \lstinputlisting{../src/5/guess_game_test.vhd}
+}
+\caption{Guess Game test design}	
+\label{src:guess_game_test}
 \end{table}
 
 \subsection{Resultater og diskussion}
 
-\pic{rea1}{0.7}{Realisering af bin2hex}{fig:bin2hex}
-
-\pic{rtl_case.png}{0.4}{RTL view for bin2hex}{fig:rtl_bin2hex}
-
 \subsection{Konklusion}
+
 
 \end{document}

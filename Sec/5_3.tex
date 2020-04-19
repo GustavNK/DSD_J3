@@ -1,0 +1,78 @@
+\documentclass[../journal.tex]{subfiles}
+\graphicspath{{Figs/5_3/}{../Figs/5_3/}}  %Path from main  and path from this file til graphics
+
+% Source input
+% \begin{table}[H]
+%     \centering
+%       \framebox{
+%         \rule{8pt}{0pt}
+%           \lstinputlisting[firstline=1,lastline=16]{../src/code_name.vhd}
+%   }
+%   \caption{Kode for 4bit-adder med unsigned}	
+%   \label{src:Tab11}
+% \end{table}
+
+% Pictures{name of file}{size compared to page}{captions}{label}
+% \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
+
+
+
+%-----------DOCUMENT--------------
+
+\begin{document}
+
+\subsection{Introduktion}
+
+\subsection{Design og implementering}
+% Design the two-player game as depicted in figure 3.  Use if/case/when/with-selectas appropriate. Argument why you have chosen one solution over others.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/5/two_player_total_mux.vhd}
+  }
+  \caption{Mux 1 design}	
+  \label{src:mux1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/5/two_player_show_mux.vhd}
+  }
+  \caption{Mux 1 design}	
+  \label{src:mux2}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/5/two_player_guess_game.vhd}
+  }
+  \caption{two player guess game}	
+  \label{src:two_guess}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/5/two_player_guess_game_tester.vhd}
+  }
+  \caption{Two player guess game test}	
+  \label{src:two_guess_test}
+\end{table}
+
+
+\subsection{Resultater og diskussion}
+% Download and test your design on the DE-2 board.  “Player” should be connectedto a switch (SW). Latches? How many and why?
+
+\pic{rea5_3.jpeg}{0.6}{Realisering af two player guess game}{fig:rea5_3}
+
+\subsection{Konklusion}
+
+
+\end{document}

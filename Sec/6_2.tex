@@ -1,0 +1,77 @@
+\documentclass[../journal.tex]{subfiles}
+\graphicspath{{Figs/6_2/}{../Figs/6_2/}}  %Path from main  and path from this file til graphics
+
+% Source input
+% \begin{table}[H]
+%     \centering
+%       \framebox{
+%         \rule{8pt}{0pt}
+%           \lstinputlisting[firstline=1,lastline=16]{../src/code_name.vhd}
+%   }
+%   \caption{Kode for 4bit-adder med unsigned}	
+%   \label{src:Tab11}
+% \end{table}
+
+% Pictures{name of file}{size compared to page}{captions}{label}
+% \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
+
+
+
+%-----------DOCUMENT--------------
+
+\begin{document}
+
+\subsection{Introduktion}
+
+I denne øvelse vil vi udvide vores multi\_counter design med en clock generator, som reglmæssigt kan sende et clock signal ud til clk på multi\_counter.
+
+\subsection{Design og implementering}
+
+I vores entity for clock\_gen, har vi først deklareret nogle konstanter, Generics, som vi kan bruge til at gøre koden mere letlæselig. Her efter er deklareret de input og outputs der skal bruges i følge IBDen
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1,lastline=21]{../src/6/clock_gen.vhd}
+  }
+  \caption{Entity af clock\_gen}	
+  \label{src:clock_ent}
+\end{table}
+
+Arktuekturen for clock\_gen er delt op i to processes. Den første process, counting, er baseret på samme blok som "counter", fra multi\_counter. Den tæller op på rising\_edge af clock signalet, og kan nusltille counteren, hvis der bliver trykket reset, eller et clear signal sendes. \par
+Den anden process "choice", nedskallerer 50MHz clock signalet fra DE2-boardet til 5ms og 1s, alt efter hvilken hastighed er valgt på "speed" signalet. Dette gøres ved at "choice" venter på at signalet er tikket et antal gange, som vi har defineret opppe under Generics. 
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=23,lastline=57]{../src/6/clock_gen.vhd}
+  }
+  \caption{Architecture af clock\_gen}	
+  \label{src:clock_arch}
+\end{table}
+
+På figur \ref{src:clock_test} ses implementeringen af testbenchen, der forbinder clock\_gen med designet fra multi\_counter, som beskrevet på IBDen for opgaven.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=23,lastline=57]{../src/6/one_digit_clock_test.vhd}
+  }
+  \caption{Architecture af one\_digit\_clock\_test}	
+  \label{src:clock_test}
+\end{table}
+
+\subsection{Resultater og diskussion}
+
+Figur \ref{fig:clock_sim} viser realiseringen af et One digit clock. KEY[0] kan ændre hastigheden, KEY[3] kan resete og SE[16-17] kan ændre om der tælles til 9, 5 eller 2.
+
+\pic{6_2.jpeg}{0.8}{Realisering af one\_digit\_clock\_test}{fig:clock_sim}
+
+\subsection{Konklusion}
+
+Desginet har har virket som vi forventede, og kan derfor tælle op af sig selv. 
+
+\end{document}
