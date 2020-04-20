@@ -27,12 +27,71 @@ I denne øvelse vil vi sammenkoble en række af multi\_counter, for at kunne vis
 
 \subsection{Design og implementering}
 
+Først har vi lavet koden til rest\_logic, som sikrer at vi får startet uret forfra, når det rammer 24:00:00. Dette gør den ved at se på bit 2 af hrs\_bin1 og bit 1 fra hrs\_bin10. Dette er gjort, da 0010 = 2 og 0100 = 4, da det altid er nemmest at tjekke for et bestemt bit, når man vil tjekke for $2^x$.
 
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/6/reset_logic.vhd}
+  }
+  \caption{Design af reset\_logic}	
+  \label{src:reset}
+\end{table}
 
+Selve designet af watch.vhd er blot en forlængelse af designet fra opgave 6.2. Her ser vi det smarte ved at inkludere "mode" i multi\_counter. Denne gør det nemmt af skifte imellem at tælle til 2, 5 eller 9, alt efter hviken del af uret der vises. F.eks. skal minutterne kun vise op til 59, før den overflower, så at sikre at 10erne i minutter kun tæller til 5 er rigtig smart. Desuden er der også gjordt klar til "tm", som skal bruges i næste opgave.
 
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1, lastline=17]{../src/6/watch.vhd}
+  }
+  \caption{Entity for watch del 1/2}	
+  \label{src:wtch_ent}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=19, lastline=51]{../src/6/watch.vhd}
+  }
+  \caption{Entity for watch del 2/2}	
+  \label{src:watch_arch1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=50, lastline=95]{../src/6/watch.vhd}
+  }
+  \caption{Entity for watch}	
+  \label{src:watch_arch2}
+\end{table}
+
+I vores testbench har vi forbundet alle inputs og outputs som står beskrevet i IBDen for "watch". Dog har vi efterladt "tm" som open, da denne ikke skal bruges endnu. Vi har inkluderet en LEDR(0) i entity, uden at bruge den, da designet ikke fungerer korrekt uden. Dette lader til at være en bug i Quartus.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/6/watch_test.vhd}
+  }
+  \caption{Design af testbench til watch}	
+  \label{src:watch_test}
+
+\end{table}
 
 \subsection{Resultater og diskussion}
 
+Her under på figur \ref{fig:watch} ses vores realisering af watch.vhd. Uret viser tiden, men kan også spoles frem med 5ms intervaller, ved at trykke på KEY(0), og resttes med KEY(3). Uret opfører sig som vi havde forventet.
+
+\pic{6_3.jpeg}{0.8}{Realisering af watch}{fig:watch}
+
 \subsection{Konklusion}
+
+Uret fungerede som det skulle, og kunne tælle op med 1 sekunds eller 5 millisekunders, interval. Vi havde en del problemer med sekunder tællerne, der hele tiden ville tælle [00, 01, 12, 13 ... 19, 20, 21, 32, 33], men dette fik vi løst ved at indsætte en LEDR i testbenchen, der ikke bliver brugt.
 
 \end{document}

@@ -16,17 +16,105 @@
 % \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
 
 
-
 %-----------DOCUMENT--------------
 
 \begin{document}
 
 \subsection{Introduktion}
 
+I denne øvelse vil vi udnytte designet i watch, til at skabe en alarm watch, som kan ringe (lyse med en LED) når uret når et bestemt tidspunkt.
+
 \subsection{Design og implementering}
+
+Først ønsker vi at lave en input limiter, som kan sikre de inputs der bliver givet fra switches, ikke overstiger de værdier vi ønsker at sammenligne med fra watch.I tabel \ref{src:input_ent} ses opsætningen af input\_limiter.
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1,lastline=13]{../src/6/input_limiter.vhd}
+  }
+  \caption{Entity for input\_linmiter}	
+  \label{src:input_ent}
+\end{table}
+
+Her under i tabel \ref{src:input_arch} ses arkitekturen for input\_limiter. Den sikre med en række if-else statements, at værdierne der kommer ind fra vores switches, ikke overstiger 23:59:00, da dette er de højeste værdier uret kan vise.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=15,lastline=53]{../src/6/input_limiter.vhd}
+  }
+  \caption{Entity for input\_limiter}	
+  \label{src:input_arch}
+\end{table}
+
+Tabel \ref{src:compare} viser designet af vores compare. Den sammenligner timer og minutter fra watch med timer og minutter fra compare\_logic, og sender et '1' ud, når de er ens.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/6/compare.vhd}
+  }
+  \caption{Design af compare}	
+  \label{src:compare}
+\end{table}
+
+Her under ses entity for alarm\_watch. Ud over inputs og outputs, har vi også inkluderet en generic, til at indholde kombinationen for "0", når det skal vises på en bin2sevenseg.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1, lastline=19]{../src/6/alarm_watch.vhd}
+  }
+  \caption{Entity for alarm watch}	
+  \label{src:alarm_ent}
+\end{table}
+
+Her under på tabel \ref{src:alarm_arch1} og \ref{src:alarm_arch2} ses arkitekturen for alarm\_watch, som den er beskrevet i opgavens IBD. Ud over at sætte de enkelte dele sammen, har vi også tilføjet en kort MUX, som vi ikke følte behøvede sin egen fil. Den viser værdien af inputtet fra switches (alarmen) eller fra watch, ud fra værdien af sel. Koden er delt op i 2 dele, da den er ret lang.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=21, lastline=45]{../src/6/alarm_watch.vhd}
+  }
+  \caption{Arkitektur for alarm watch del 1/2}	
+  \label{src:alarm_arch1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=46]{../src/6/alarm_watch.vhd}
+  }
+  \caption{Arkitektur for alarm watch del 2/2}	
+  \label{src:alarm_arch2}
+\end{table}
+
+På tabel \ref{src:alarm_test} er selve implementeringen af alarm\_watch i vores testbench.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/6/alarm_watch_tester.vhd}
+  }
+  \caption{Design af alarm\_clock\_tester}	
+  \label{src:alarm_test}
+\end{table}
 
 \subsection{Resultater og diskussion}
 
+Figur \ref{fig:alarm} viser realiseringen af vores alarm\_watch. Alarmen er på billedet sat til 00:03, som vi kan se på switchesne. Da uret viser 00:03.00, lyser LEDR(0), for at indikere at alarm er gået igang. Denne forsvinder igen efter 1 minut.
+
+\pic{6_4.jpeg}{0.9}{Realisering af alarm\_watch}{fig:alarm}
+
 \subsection{Konklusion}
+
+Designet af alarm\_watch har fungeret som vi havde forventet. Vi kan få vist tiden, samtidig med at vi kan sætte en alarm, der får en LED ti lat lyse, når uret matcher med tiden der er sat på vores switches. Designet kunne have været udvidet til også at inkludere en buzzer, som opgave 5 ligger op til. Desværre har vi pga. COVID-19, ikke mulgihed for at skaffe en buzzer fra værkstedet.
 
 \end{document}

@@ -4,7 +4,7 @@ use work.all;
 
 entity alarm_watch is
 generic(
-	b2s_zero : std_logic_vector(6 downto 0) := "0000000"
+	b2s_zero : std_logic_vector(6 downto 0) := "0000001"
 );
 port(
 	-- Input
@@ -34,6 +34,7 @@ begin
 	--b2s for the alarm
 	alarm_s(6 downto 0) <= b2s_zero;
 	alarm_s(13 downto 7) <= b2s_zero;
+
 	b2s_m1: bin2sevenseg(bin2sevenseg_arch) port map(
 		bin => bin(3 downto 0),
 		sseg => alarm_s(20 downto 14)
@@ -52,16 +53,13 @@ begin
 	);
 	--Watch setup
 	w1: watch(arch) port map(
-		clk => clock,
-		speed => key0,
-		reset => key3,
-		sec_1 => watch_s(6 downto 0),
-		sec_10 => watch_s(13 downto 7),
+		clk => clock, speed => key0,
+		reset => key3, sec_1 => watch_s(6 downto 0),
+		sec_10 => watch_s(13 downto 7), 
 		min_1 => watch_s(20 downto 14),
-		min_10 => watch_s(27 downto 21),
+		min_10 => watch_s(27 downto 21), 
 		hrs_1 => watch_s(34 downto 28),
-		hrs_10 => watch_s(41 downto 35),
-		tm => tm_s
+		hrs_10 => watch_s(41 downto 35), tm => tm_s
 	);
 	
 	--Compare logic

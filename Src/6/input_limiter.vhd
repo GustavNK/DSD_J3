@@ -32,7 +32,8 @@ begin
 		end if;
 		
 		--1s hour limit
-		if (to_integer(unsigned(bin_hrs1)) > 4 AND to_integer(unsigned(bin_hrs10)) > 1) then
+		if (to_integer(unsigned(bin_hrs1)) > 4 AND 
+		to_integer(unsigned(bin_hrs10)) > 1) then
 			h1 := std_logic_vector(to_unsigned(4,4));
 		elsif to_integer(unsigned(bin_hrs1)) > 9 then
 			h1 := std_logic_vector(to_unsigned(9,4));
