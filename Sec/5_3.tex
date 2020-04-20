@@ -22,9 +22,14 @@
 \begin{document}
 
 \subsection{Introduktion}
+I denne del af opgaven vil vi genbruge vores arbejde fra 5.2 til at konstruere et Guess Game der tillader op til to(2) spillere. 
+
+
 
 \subsection{Design og implementering}
 % Design the two-player game as depicted in figure 3.  Use if/case/when/with-selectas appropriate. Argument why you have chosen one solution over others.
+
+Der vil igen her blive gjort brug af \textit{Structural} strukturen til at opbygge vores kode. I denne version skal der være mulighed for at have to(2) spillere, og vi indkludere derfor en ekstra Mux til at vælge imellem spiller 1 og 2. En ekstra mux mere bliver også benyttet til at at bestemme hvems gæt der enten er rigtigt eller forkert. Til sidst indkludere vi en bin2hex, der fortæller os om det er spiller 1 eller spiller 2 der har mulighed for at gætte: Koden for Muxen der kontrollere input og Muxen der kontrollere output kan ses nedenfor kan ses nedenfor:
 
 \begin{table}[H]
     \centering
@@ -32,7 +37,7 @@
         \rule{8pt}{0pt}
           \lstinputlisting{../src/5/two_player_total_mux.vhd}
   }
-  \caption{Mux 1 design}	
+  \caption{Mux input design}	
   \label{src:mux1}
 \end{table}
 
@@ -42,9 +47,11 @@
         \rule{8pt}{0pt}
           \lstinputlisting{../src/5/two_player_show_mux.vhd}
   }
-  \caption{Mux 1 design}	
+  \caption{Mux output design}	
   \label{src:mux2}
 \end{table}
+
+Her ses brugen af \textit{Structural}, hvor både bin2hex og guess\_game bliver genbrugt. Der konstrueres desuden en tester, så koden kan realiseres på DE2-Boar. Koden for two\_player\_guess\_game, samt for testeren kan ses nedenfor:
 
 \begin{table}[H]
     \centering
@@ -52,7 +59,7 @@
         \rule{8pt}{0pt}
           \lstinputlisting{../src/5/two_player_guess_game.vhd}
   }
-  \caption{two player guess game}	
+  \caption{two\_player\_guess\_game.vhd}	
   \label{src:two_guess}
 \end{table}
 
@@ -62,7 +69,7 @@
         \rule{8pt}{0pt}
           \lstinputlisting{../src/5/two_player_guess_game_tester.vhd}
   }
-  \caption{Two player guess game test}	
+  \caption{two\_player\_guess\_game\_tester.vhd}	
   \label{src:two_guess_test}
 \end{table}
 
@@ -70,9 +77,14 @@
 \subsection{Resultater og diskussion}
 % Download and test your design on the DE-2 board.  “Player” should be connectedto a switch (SW). Latches? How many and why?
 
+På Fig.\ref{fig:rea5_3} kan resultatet af vores realisering på DE2-Boardet ses. Switches bruges som tidligere til input af værdier, og Keys styrer om værdien gemmes, eller om en allerede gemt værdi fremvises. En switch benyttes så til at styre hvilken spiller der kan gætte.
+
 \pic{rea5_3.jpeg}{0.6}{Realisering af two player guess game}{fig:rea5_3}
 
-\subsection{Konklusion}
+Hvis man kigger på Tab. 1 og Tab. 2, ser man at vi har benyttet case-statements i begge vores Mux. Vi har valgt case-statements da when og with-select statement bedre egner sig til at sende værdier videre til flere outputs på en gang. Og da if statements bliver unødigt komplicerede, er case-statements oplagt.\newline
+Vi ser også igen i RTL-viewer at der ikke findes nogen latches hvor de ikke ønskes, bl.a. grundet genbrugen af Guess Game fra opgave 5.2.
 
+\subsection{Konklusion}
+Vi så den forventede opførsel af vores two player Guess Game på DE2-Boardet. Endvidere fik vi foretaget denne realisering uden behov for unødige latches, og benyttede kun latches hvor ønsket, præcis som i den første version af vores Guess Game.
 
 \end{document}
