@@ -76,7 +76,7 @@ Til sidst foretog vi en realisering af vores system på DE2-Board. Et gæt-input
 
 \subsection{Resultater og diskussion}
 
-Fra vores realisering så vi den ønskede opførsel af vores Guess Game. Den kunne tage alle de ønskede inputs, og korrekt fremvise hvorvidt de var det korrekte svar.\newline \newline
+Fra vores realisering så vi den ønskede opførsel af vores Guess Game. Den kunne tage alle de ønskede inputs, og korrekt fremvise hvorvidt de var det korrekte svar. \par 
 Hvis vi kigger på hvordan Quartus har konstrueret systemmet ud fra vores kode, ser vi brug af latches i voes mylatch.vhd. Dette var selvfølgelig tiltænkt, og viser blot at vi har formået korrekt at implementere vores latch. Vi ser dog ingen latches i resten af vores system, bl.a. fordi vi genbruger vores bin2hex, hvor vi allerede havde elimineret alle latches. RTL-viewer diagram for koden kan ses på Fig.\ref{fig:figwq}:
 
 \pic{filter1.JPG}{0.7}{Realisering af bin2hex}{fig:figwq}
