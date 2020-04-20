@@ -1,7 +1,7 @@
 \documentclass[../journal.tex]{subfiles}
-\graphicspath{{Figs/3_1/}{../Figs/3_1/}}  %Path from main  and path from this file til graphics
+\graphicspath{{Figs/5_1/}{../Figs/5_1/}}  %Path from main  and path from this file til graphics
 
-% Source input
+% --Source input--
 % \begin{table}[H]
 %     \centering
 %       \framebox{
@@ -14,8 +14,6 @@
 
 % Pictures{name of file}{size compared to page}{captions}{label}
 % \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
-
-
 
 %-----------DOCUMENT--------------
 
@@ -49,7 +47,42 @@ Vi har desuden lavet en tester for forrige kode, idet vi gerne vil foretage en r
   \label{src:TabConTest}
 \end{table}
 
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1,lastline=9]{../src/5/bin2hex.vhd}
+  }
+  \caption{Entity for bin2hex.vhd}	
+  \label{src:bin2hex_ent}
+\end{table}
+
+s
+\begin{table}[H]
+    \centering
+        \framebox{
+        \rule{8pt}{0pt}
+            \lstinputlisting[firstline=11,lastline=35]
+            {../src/5/bin2hex.vhd}
+    }
+    \caption{Architechture for bin2hex.vhd}	
+    \label{src:bin2hex_arch}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+        \framebox{
+        \rule{8pt}{0pt}
+            \lstinputlisting
+            {../src/5/bin2hex_test.vhd}
+    }
+    \caption{Design af testbench for bin2hex}	
+    \label{src:bin2hex_test}
+\end{table}
+
 \subsection{Resultater og diskussion}
+
 
 Fra vores realisering af koden så vi den forventede opførsel af en binær-til-7-segment konverter. Vi kunne give binære tal fra 1 til 15 som input, og se de tilsvarende hextal på vores 7-segment display. Input af det binære tal INDSÆT TIL DER BLIVER VIST PÅ BILLEDE HER!!!!!! kan ses på Fig.\ref{Fig51} :
 
@@ -61,6 +94,12 @@ Så ingen latches pga. others
 
 
 \subsection{Konklusion}
+=======
+\pic{rea1}{0.7}{Realisering af bin2hex}{fig:bin2hex}
 
+
+\pic{rtl_case.png}{0.4}{RTL view for bin2hex}{fig:rtl_bin2hex}
+
+\subsection{Konklusion}
 
 \end{document}

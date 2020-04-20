@@ -1,0 +1,55 @@
+\documentclass[../journal.tex]{subfiles}
+\graphicspath{{Figs/3_1/}{../Figs/3_1/}}  %Path from main  and path from this file til graphics
+
+% Source input
+% \begin{table}[H]
+%     \centering
+%       \framebox{
+%         \rule{8pt}{0pt}
+%           \lstinputlisting[firstline=1,lastline=16]{../src/code_name.vhd}
+%   }
+%   \caption{Kode for 4bit-adder med unsigned}	
+%   \label{src:Tab11}
+% \end{table}
+
+% Pictures{name of file}{size compared to page}{captions}{label}
+% \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
+
+
+
+%-----------DOCUMENT--------------
+
+\begin{document}
+
+\subsection{Introduktion}
+
+\subsection{Design og implementering}
+% Design the 8-input NAND gate depicted in figure 4 using a loop statement
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/5/nand8_name.vhd}
+  }
+  \caption{Nand8 design}	
+  \label{src:nand8}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting{../src/5/nand8_name_tester.vhd}
+  }
+  \caption{Nand8 testbench design}	
+  \label{src:nand8_test}
+\end{table}
+
+\subsection{Resultater og diskussion}
+% Perform a functional simulation of the design to verify its functionality
+
+\subsection{Konklusion}
+
+
+\end{document}

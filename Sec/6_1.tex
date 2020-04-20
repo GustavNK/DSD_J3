@@ -1,0 +1,78 @@
+\documentclass[../journal.tex]{subfiles}
+\graphicspath{{Figs/6_1/}{../Figs/6_1/}}  %Path from main  and path from this file til graphics
+
+% Source input
+% \begin{table}[H]
+%     \centering
+%       \framebox{
+%         \rule{8pt}{0pt}
+%           \lstinputlisting[firstline=1,lastline=16]{../src/code_name.vhd}
+%   }
+%   \caption{Kode for 4bit-adder med unsigned}	
+%   \label{src:Tab11}
+% \end{table}
+
+% Pictures{name of file}{size compared to page}{captions}{label}
+% \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
+
+
+
+%-----------DOCUMENT--------------
+
+\begin{document}
+
+\subsection{Introduktion}
+Formålet med øvelsen er, at designe en binær cirkulær tæller, der kan tælle fra 0-9, 0-5 og fra 0-2, samt at sende et overflow videre, når tælleren starter forfra. 
+
+\subsection{Design og implementering}
+Designet af multi counter kan ses her under på tabel \ref{src:multiEnt} og \ref{src:multiArch}. Dens entity kan ses her under. Vi har brugt en generic til at sikre defineringen af interger "cnt" ikke går over en værdi af 4-bit, da dette ville ødelægge resten af programmet.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1,lastline=19]{../src/6/multi_counter.vhd}
+  }
+  \caption{Multi counter entity}	
+  \label{src:multiEnt}
+\end{table}
+
+Arkitekturen af multi\_ counter består af 3 processor. Counter-processen sørger for at tælle "count" en op, for hver rising\_ edge clk signal der modtages, samt at nulstille hvis reset eller clear er aktive. Mux-processen tager 2 bit ind, og vurderer her fra, hvor meget der skal tælles til, og sætter et clear signal, når counteren skal nulstilles. cout\_ proc-processen sørger for at sende et '1' ud, når counteren overflower.
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=21,lastline=61]{../src/6/multi_counter.vhd}
+  }
+  \caption{Multi counter architecture}	
+  \label{src:multiArch}
+\end{table}
+
+For at teste multicounteren, har vi lavet en testbench som her under i tabel \ref{src:multi_test}. For at vise outputtet fra mulit\_ counter, har vi genbrugt koden fra bin2sevenseg, fra en tidligere øvels. Desuden vises cout på en LED.
+
+\begin{table}[H]
+  \centering
+    \framebox{
+      \rule{8pt}{0pt}
+        \lstinputlisting{../src/6/multi_counter_test.vhd}
+}
+\caption{Multi counter testbench}	
+\label{src:multi_test}
+\end{table}
+
+\subsection{Resultater og diskussion}
+
+På figur \ref{fig:sim_61} har vi simuleret multi\_counter. Vi har desværre haft nogle problemer med simuleringen, som gjorde at count[3] ikke kunne simuleres, men designet virkede fint på DE2-boardet. Dog kan vi stadig se ideen med simuleringen. Når vi skifter mode, fortsætter counteren op som vi forventede, men overflower nu på det nye tidpunkt som mode bestemmer. Dette kan vi se sker både på counter til 9 (her op til 7), 5 og 2. Desuden kan vi se, hver gang counteren overflower, bliver cout sat til '1', mens count er "0000".
+
+\pic{sim.PNG}{1}{Simulering af multi\_counter}{fig:sim_61}
+
+Her under på figur \ref{fig:mult} ses et eksempel på multi\_counter i brug. Vi kan bruge KEY[0] som clock, reset med KEY[3] og ændre mode med SW[16] og SW[17].
+
+\pic{6_1.jpeg}{0.8}{Realisering af multi\_counter\_tester.vhd}{fig:mult}
+
+\subsection{Konklusion}
+
+Counteren kan bruges til at tælle op, på bestemte tidpunkter, f.eks. ved rising edge af et clock signal. Som vi kommer til at se senere, er dette design nemt at udvide og forlænge, til noget meget brugbart.
+
+\end{document}
