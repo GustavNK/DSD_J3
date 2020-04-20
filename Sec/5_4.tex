@@ -1,5 +1,5 @@
 \documentclass[../journal.tex]{subfiles}
-\graphicspath{{Figs/3_1/}{../Figs/3_1/}}  %Path from main  and path from this file til graphics
+\graphicspath{{Figs/5_4/}{../Figs/5_4/}}  %Path from main  and path from this file til graphics
 
 % Source input
 % \begin{table}[H]
@@ -22,9 +22,12 @@
 \begin{document}
 
 \subsection{Introduktion}
+I denne del af øvelsen skal vi lære at benytte loops i Quartus. Vi vil derfor konstruere en 8-input NAND-gate vha. et loop-statement.
 
 \subsection{Design og implementering}
 % Design the 8-input NAND gate depicted in figure 4 using a loop statement
+
+Til desginet af systemmet benyttes som sagt et loop-statement. Signalet y\_p sættes til 0, og loopet kører så alle værdierne i vectoren `a' igennem. Hvis en af elementer i `a' på noget tidspunkt er lig 1, bliver y\_p sat til 1. Idet loopet eksisterer inde i en process, bliver alle elementerne sammenlignet på samme tid, og vi får derved vores 8-input NAND-gate. Det eneste tidspunkt en NAND-gate vil give et output på nul, er hvis alle inputs er lig 1. Så hvis blot ét enkelt af elementer i `a' er lig 0, bliver outputtet 1, gjort gennem y\_p. Koden for NAND-gate kan ses nedenfor, sammen med koden for vores tester som vi vil benytte til at foretage en functional simulation:
 
 \begin{table}[H]
     \centering
@@ -32,7 +35,7 @@
         \rule{8pt}{0pt}
           \lstinputlisting{../src/5/nand8_name.vhd}
   }
-  \caption{Nand8 design}	
+  \caption{Nand8\_name.vhd}	
   \label{src:nand8}
 \end{table}
 
@@ -42,14 +45,18 @@
         \rule{8pt}{0pt}
           \lstinputlisting{../src/5/nand8_name_tester.vhd}
   }
-  \caption{Nand8 testbench design}	
+  \caption{Nand8\_name\_tester.vhd}	
   \label{src:nand8_test}
 \end{table}
 
 \subsection{Resultater og diskussion}
 % Perform a functional simulation of the design to verify its functionality
 
-\subsection{Konklusion}
+På Fig.\ref{fig:Func5} ses resultatet af vores functional simulation af 8-input NAND-gaten. VI valgte at teste grænsetilfældene med rene 1'ere og rene 0'ere, og tre(3) mellemtilfælde med fire(4) 1'ere, to(2) 1'ere, og syv(7) 1'ere. Vi ser præcis den forventede opførsel, nemlig at hvis blot en af vores input er lig 0, vil vores output blive lig 1, som er den præcise opførsel af en 8-input NAND-gate.
 
+\pic{func_nand8.PNG}{0.7}{Functional simulation af 8-input NAND-gate}{fig:Func5}
+
+\subsection{Konklusion}
+Vi konlkudere at vi har formået at konstruere en 8-input NAND-gate vha. et loop-statement. Ved at foretage en Functional Simulation har vi testet hvordan system vil opfører sig, hvilket vi finder overens med vores forventninger om en 8-input NAND-gate.
 
 \end{document}
