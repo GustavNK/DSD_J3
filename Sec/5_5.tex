@@ -1,0 +1,60 @@
+\documentclass[../journal.tex]{subfiles}
+\graphicspath{{Figs/5_5/}{../Figs/5_5/}}  %Path from main  and path from this file til graphics
+
+% Source input
+% \begin{table}[H]
+%     \centering
+%       \framebox{
+%         \rule{8pt}{0pt}
+%           \lstinputlisting[firstline=1,lastline=16]{../src/code_name.vhd}
+%   }
+%   \caption{Kode for 4bit-adder med unsigned}	
+%   \label{src:Tab11}
+% \end{table}
+
+% Pictures{name of file}{size compared to page}{captions}{label}
+% \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
+
+
+
+%-----------DOCUMENT--------------
+
+\begin{document}
+
+\subsection{Introduktion}
+I denne af øvelsen vil vi benytte et loop-statement til at læse en logisk tælning op i et array, og outputte det på et 7-segment display.
+
+\subsection{Design og implementering}
+Vores design er fokuseret på at igen benytte loop-statements. Variablen \textit{count} sættes først lig 0. Derfefter køres alle elementerne i arrayet `A' igennem vha. et loop-statement. Hvis et element er lig `1', vil count variablen tælles en(1) op. Når alle elementer i `A' er kørt igennem laves count først til \textit{integer}, derefter \text{std\_logic\_vector} for at kunne lægges over i output vektoren ones. Koden for tælleren samt koden for testeren til brug på DE2-Boardet kan findes nedenfor:
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1,lastline=30]{../src/5/counting_ones.vhd}
+  }
+  \caption{counting\_ones.vhd}	
+  \label{src:TabConTest}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1,lastline=30]{../src/5/count_ones_test.vhd}
+  }
+  \caption{count\_ones\_test.vhd}	
+  \label{src:TabConTest}
+\end{table}
+
+Til sidst foretog vi en realisering på DE2-Boardet vha. vores tester-fil. Nedenfor ses DE2-Boardet hvor der gives et input af 5 logiske 1-taller, og Hex-displayet viser tilsvarende 5.
+\pic{5_5.jpeg}{0.8}{RTL view for bin2hex}{fig:rtl_bin2hex}
+
+\subsection{Resultater og diskussion}
+Ift. resultater har vi blot vores test på DE2-Boardet. Her så vi den ønskede opførsel, som forventet af vores tæller. loop-statementet er her brugbart, idet at hver gang `A' opdateres, kan vi løbe alle elementerne den indeholder igennem, og tjekke hvor mange gange \textit{count} skal tælle op.
+
+\subsection{Konklusion}
+Vi konkludere at vi fik designet og realiseret vores tæller der kan omsætte logiske 1-taller i et array til et 7-segment display vha. loop-statements.
+
+
+\end{document}
