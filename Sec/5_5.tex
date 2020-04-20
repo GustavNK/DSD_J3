@@ -1,0 +1,62 @@
+\documentclass[../journal.tex]{subfiles}
+\graphicspath{{Figs/5_5/}{../Figs/5_5/}}  %Path from main  and path from this file til graphics
+
+% Source input
+% \begin{table}[H]
+%     \centering
+%       \framebox{
+%         \rule{8pt}{0pt}
+%           \lstinputlisting[firstline=1,lastline=16]{../src/code_name.vhd}
+%   }
+%   \caption{Kode for 4bit-adder med unsigned}	
+%   \label{src:Tab11}
+% \end{table}
+
+% Pictures{name of file}{size compared to page}{captions}{label}
+% \pic{Unsigned1.png}{1}{opbygning af 4bit-adder}{Fig11}
+
+
+
+%-----------DOCUMENT--------------
+
+\begin{document}
+
+\subsection{Introduktion}
+I denne af øvelsen vil vi benytte et loop-statement til at læse en logisk tælning op i et array, og outputte det på et 7-segment display.
+
+\subsection{Design og implementering}
+Vores design er fokuseret på at igen benytte loop-statements. Variablen \textit{count} sættes først lig 0. Derfefter køres alle elementerne i arrayet `A' igennem vha. et loop-statement. Hvis et element er lig `1', vil count variablen tælles en(1) op. Når alle elementer i `A' er kørt igennem laves count først til \textit{integer}, derefter \text{std\_logic\_vector} for at kunne lægges over i output vektoren ones. Koden for tælleren samt koden for testeren til brug på DE2-Boardet kan findes nedenfor:
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1,lastline=30]{../src/5/counting_ones.vhd}
+  }
+  \caption{counting\_ones.vhd}	
+  \label{src:TabConTest}
+\end{table}
+
+\begin{table}[H]
+    \centering
+      \framebox{
+        \rule{8pt}{0pt}
+          \lstinputlisting[firstline=1,lastline=30]{../src/5/count_ones_test.vhd}
+  }
+  \caption{count\_ones\_test.vhd}	
+  \label{src:TabConTest}
+\end{table}
+
+%\pic{rtl_case.png}{0.4}{RTL view for bin2hex}{fig:rtl_bin2hex}
+
+Til sidst foretog vi en realisering på DE2-Boardet vha. vores tester-fil. 
+
+
+\subsection{Resultater og diskussion}
+
+
+
+
+\subsection{Konklusion}
+
+\end{document}
