@@ -18,97 +18,77 @@ end;
 
 architecture arch of watch is
 --signals
-signal clk_s 	: std_logic;
-signal cout_s_1, cout_s_10, cout_m_1, cout_m_10, cout_h_1,cout_h_10
+signal clk_s 		: std_logic;
+signal cout_s_1, cout_s_10, cout_m_1, 
+	cout_m_10, cout_h_1,cout_h_10
 					: std_logic;
-signal count_s_1,count_s_10, count_m_1, count_m_10, count_h_1, count_h_10
+signal count_s_1,count_s_10, count_m_1, 
+	count_m_10, count_h_1, count_h_10
 					: std_logic_vector(3 downto 0);
 signal reset_s : std_logic;
 
 begin
 	clk1: clock_gen(arch) port map(
-		clk => clk, 
-		speed => speed, 
-		reset => reset, 
-		clk_out =>clk_s
+		clk => clk, speed => speed, 
+		reset => reset, clk_out =>clk_s
 	);
 	
 	--Multi counter
 	s1: multi_counter(arch) port map(
-		clk => clk_s,
-		mode => "00",
-		reset => reset_s,
-		count => count_s_1,
+		clk => clk_s, mode => "00",
+		reset => reset_s, count => count_s_1,
 		cout => cout_s_1
 	);
 	s10: multi_counter(arch) port map(
-		clk => cout_s_1,
-		mode => "01",
-		reset => reset_s,
-		count => count_s_10,
+		clk => cout_s_1, mode => "01",
+		reset => reset_s, count => count_s_10,
 		cout => cout_s_10
 	);
 	m1: multi_counter(arch) port map(
-		clk => cout_s_10,
-		mode => "00",
-		reset => reset_s,
-		count => count_m_1,
+		clk => cout_s_10, mode => "00",
+		reset => reset_s, count => count_m_1,
 		cout => cout_m_1
 	);
 	m10: multi_counter(arch) port map(
-		clk => cout_m_1,
-		mode => "01",
-		reset => reset_s,
-		count => count_m_10,
+		clk => cout_m_1, mode => "01",
+		reset => reset_s, count => count_m_10,
 		cout => cout_m_10
 	);
 	h1: multi_counter(arch) port map(
-		clk => cout_m_10,
-		mode => "00",
-		reset => reset_s,
-		count => count_h_1,
+		clk => cout_m_10, mode => "00",
+		reset => reset_s, count => count_h_1,
 		cout => cout_h_1
 	);
 	h10: multi_counter(arch) port map(
-		clk => cout_h_1,
-		mode => "11",
-		reset => reset_s,
-		count => count_h_10,
+		clk => cout_h_1, mode => "11",
+		reset => reset_s, count => count_h_10,
 		cout => open
 	);
 	
 	-- Binary to seven segment
 	b2s_s1: bin2sevenseg(bin2sevenseg_arch) port map(
-		bin => count_s_1,
-		sseg => sec_1
+		bin => count_s_1, sseg => sec_1
 	);
 	b2s_s10: bin2sevenseg(bin2sevenseg_arch) port map(
-		bin => count_s_10,
-		sseg => sec_10
+		bin => count_s_10, sseg => sec_10
 	);
 	b2s_m1: bin2sevenseg(bin2sevenseg_arch) port map(
-		bin => count_m_1,
-		sseg => min_1
+		bin => count_m_1, sseg => min_1
 	);
 	b2s_m10: bin2sevenseg(bin2sevenseg_arch) port map(
-		bin => count_m_10,
-		sseg => min_10
+		bin => count_m_10, sseg => min_10
 	);
 	b2s_h1: bin2sevenseg(bin2sevenseg_arch) port map(
-		bin => count_h_1,
-		sseg => hrs_1
+		bin => count_h_1, sseg => hrs_1
 	);
 	b2s_h10: bin2sevenseg(bin2sevenseg_arch) port map(
-		bin => count_h_10,
-		sseg => hrs_10
+		bin => count_h_10, sseg => hrs_10
 	);
 	
 	--Reset logic
 	rl: reset_logic(arch) port map(
-		reset_out => reset_s,
-		reset_in => reset,
-		hrs_bin1 => count_h_1(2),
-		hrs_bin10 => count_h_10(1)
+		reset_out => reset_s, reset_in => reset,
+		hrs_bin1 => count_h_1(2), hrs_bin10 => count_h_10(1)
 	);
 	--Output for the time match
 	tm <= count_h_10 & count_h_1 & count_m_10 & count_m_1;
