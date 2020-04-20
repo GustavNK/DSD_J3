@@ -20,7 +20,7 @@ begin
 				set1		<= set;
 				try1		<= try;
 				output1	<= input;
-				--Default værdi til player0
+				--Default vaerdi til player0
 				show0		<= '1';
 				set0		<= '1';
 				try0		<= '1';
@@ -30,7 +30,7 @@ begin
 				set0		<= set;
 				try0		<= try;
 				output0	<= input;
-				--Default værdi
+				--Default vaerdi
 				show1		<= '1';
 				set1		<= '1';
 				try1		<= '1';
