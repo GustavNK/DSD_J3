@@ -25,7 +25,7 @@
 Formålet med denne del af øvelsen vil være at konstruere et `guess game' der evaluere et input der indtastes af en `spiller' som enten `Hi' `Lo' eller `-', og fortæller om du har gættet rigtigt på den hemmelig værdi indtastet af en anden `spiller'.
 
 \subsection{Design og implementering}
-Til denne øvelse benyttes der en \textit{structural} struktur. Systemmet består af to(2) Muxes, to(2) bin2hex som vi byggede i 5.1 og et `Compare logic' modul, til at styre fremvisningen af `Hi', `Lo' eller `-'. Modsat vores tidligere arbejde benytter vi også her en latch, idet specifikt har brug for at huske en værdi, her vores gæt-input, til evaluering. Nedenfor kan koden ses for vores `Compare logic' og Latch. Noter at vi ikke har indkluderet koden for multiplexerne, idet dette virker trivielt, og er blevet vist i en tidligere opgave:
+Til denne øvelse benyttes der en \textit{structural} struktur. Systemmet består af to(2) Muxes, to(2) bin2hex som vi byggede i 5.1, samt et `Compare logic' modul der skal styre fremvisningen af `Hi', `Lo' eller `-'. Modsat vores tidligere arbejde benytter vi også her en latch, idet vi specifikt har brug for at huske værdier, her vores gæt-input, til evaluering. Nedenfor kan koden ses for vores `Compare logic' og Latch. Noter at vi ikke har indkluderet koden for multiplexerne, idet dette virker trivielt, og er blevet vist i en tidligere journal:
 
 \begin{table}[H]
     \centering
@@ -69,7 +69,7 @@ Til denne øvelse benyttes der en \textit{structural} struktur. Systemmet bestå
 \label{src:guess_game_test}
 \end{table}
 
-Til sidst foretog vi en realisering af vores system på DE2-Board. Et gæt-input på værdien XX, med et output på `Hi', der indikere et rigtigt gæt, kan ses på Fig.%\ref{fig:5_2 realisering}:
+Til sidst foretog vi en realisering af vores system på DE2-Board. Et gæt-input på værdien `C' og `4' bliver indsat, og kan se gemmes vha. de Key's der ses til højre. Hex-displayet vil så indikere hvorvidt om der ikke er lavet et gæt, om der er gættet rigtigt eller om der er gættet forkert respektivt. Kan ses på Fig.\ref{fig:figw}:
 
 \pic{5_2.jpeg}{0.7}{Realisering af bin2hex}{fig:figw}
 
@@ -77,10 +77,14 @@ Til sidst foretog vi en realisering af vores system på DE2-Board. Et gæt-input
 \subsection{Resultater og diskussion}
 
 Fra vores realisering så vi den ønskede opførsel af vores Guess Game. Den kunne tage alle de ønskede inputs, og korrekt fremvise hvorvidt de var det korrekte svar.\newline \newline
-Hvis vi kigger på hvordan Quartus har konstrueret systemmet ud fra vores kode, ser vi brug af latches i voes mylatch.vhd. Dette var selvfølgelig tiltænkt, og viser blot at vi har formået korrekt at implementere vores latch.
+Hvis vi kigger på hvordan Quartus har konstrueret systemmet ud fra vores kode, ser vi brug af latches i voes mylatch.vhd. Dette var selvfølgelig tiltænkt, og viser blot at vi har formået korrekt at implementere vores latch. Vi ser dog ingen latches i resten af vores system, bl.a. fordi vi genbruger vores bin2hex, hvor vi allerede havde elimineret alle latches. RTL-viewer diagram for koden kan ses på Fig.\ref{fig:figwq}:
+
+\pic{filter1.JPG}{0.7}{Realisering af bin2hex}{fig:figwq}
+
+Billede kvaliteten er her ret dårlig, idet vi gerne ville have hele kredsløbet med. Dog er det ikke så vigtigt, da formålet blot er at vise at der ikke er nogen latches, udover i mylatch.
 
 
 \subsection{Konklusion}
-
+For vores realisering på DE2-Boardet så vi opførslen ønsket af vores Guess Game. Ved at kigge på RTL-viewer diagrammet for kredsløbet så vi videre at vi havde formået at opstille systemmet, uden at Quartus behøvede at gøre brug af unødige latches, og at vi selv kunne indsætte en latch hvor vi ønskede.
 
 \end{document}
