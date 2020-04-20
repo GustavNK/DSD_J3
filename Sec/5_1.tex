@@ -47,59 +47,53 @@ Vi har desuden lavet en tester for forrige kode, idet vi gerne vil foretage en r
   \label{src:TabConTest}
 \end{table}
 
-\begin{table}[H]
-    \centering
-      \framebox{
-        \rule{8pt}{0pt}
-          \lstinputlisting[firstline=1,lastline=9]{../src/5/bin2hex.vhd}
-  }
-  \caption{Entity for bin2hex.vhd}	
-  \label{src:bin2hex_ent}
-\end{table}
+%\begin{table}[H]
+%    \centering
+%      \framebox{
+%        \rule{8pt}{0pt}
+%          \lstinputlisting[firstline=1,lastline=9]{../src/5/bin2hex.vhd}
+%  }
+%  \caption{Entity for bin2hex.vhd}	
+%  \label{src:bin2hex_ent}
+%\end{table}
 
-s
-\begin{table}[H]
-    \centering
-        \framebox{
-        \rule{8pt}{0pt}
-            \lstinputlisting[firstline=11,lastline=35]
-            {../src/5/bin2hex.vhd}
-    }
-    \caption{Architechture for bin2hex.vhd}	
-    \label{src:bin2hex_arch}
-\end{table}
+%s
+%\begin{table}[H]
+%    \centering
+%        \framebox{
+%        \rule{8pt}{0pt}
+%            \lstinputlisting[firstline=11,lastline=35]
+%            {../src/5/bin2hex.vhd}
+%    }
+%    \caption{Architechture for bin2hex.vhd}	
+%    \label{src:bin2hex_arch}
+%\end{table}
 
 
-\begin{table}[H]
-    \centering
-        \framebox{
-        \rule{8pt}{0pt}
-            \lstinputlisting
-            {../src/5/bin2hex_test.vhd}
-    }
-    \caption{Design af testbench for bin2hex}	
-    \label{src:bin2hex_test}
-\end{table}
+%\begin{table}[H]
+%    \centering
+%        \framebox{
+%        \rule{8pt}{0pt}
+%            \lstinputlisting
+%            {../src/5/bin2hex_test.vhd}
+%    }
+%    \caption{Design af testbench for bin2hex}	
+%    \label{src:bin2hex_test}
+%\end{table}
 
 \subsection{Resultater og diskussion}
 
 
-Fra vores realisering af koden så vi den forventede opførsel af en binær-til-7-segment konverter. Vi kunne give binære tal fra 1 til 15 som input, og se de tilsvarende hextal på vores 7-segment display. Input af det binære tal INDSÆT TIL DER BLIVER VIST PÅ BILLEDE HER!!!!!! kan ses på Fig.\ref{Fig51} :
+Fra vores realisering af koden så vi den forventede opførsel af en binær-til-7-segment konverter. Vi kunne give binære tal fra 1 til 15 som input, og se de tilsvarende hextal på vores 7-segment display. Input af det binære tal 12 på switchches, med et output af hextallet `C' kan ses på Fig.\ref{fig:bin2hex} :
 
-\pic{Placeholder_Image.PNG}{0.8}{placeholder_image}{Fig51}
-%Indsæt realisering på DE2-Board for bin2hex her
-
-
-Så ingen latches pga. others
-
-
-\subsection{Konklusion}
-=======
 \pic{rea1}{0.7}{Realisering af bin2hex}{fig:bin2hex}
 
+Hvis vi kigger på RTL-viewer diagrammet of vores struktur, kan ses på Fig.\ref{fig:rtl_bin2hex}, ser vi at den ikke indeholder nogen latches. Dette skyldes formodentligt vores indkludering af et \textit{Others}-statement, der tager forhold for alle de mulige inputs vi ikke specifikt har designeret gennem et \textit{when}-statement. Derfor opbygges struktur blot gennem Muxes.
 
 \pic{rtl_case.png}{0.4}{RTL view for bin2hex}{fig:rtl_bin2hex}
 
 \subsection{Konklusion}
+
+Vi konkluderer at vi har produceret en binært-til-7-segment-decoder på et DE2-Board, der kan fremvise fra 1 til F i hextal. Systemmet opbygges gennem Muxes, og indeholder derfor ingen latches, som ønsket. 
 
 \end{document}
