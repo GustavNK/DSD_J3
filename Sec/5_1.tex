@@ -32,7 +32,6 @@ Som nævnt i introduktonen er det et krav at case-statements skal benyttes til s
           \lstinputlisting{../src/bin2hex.vhd}
   }
   \caption{Kode for bin2hex.vhd}	
-  \label{src:TabCon}
 \end{table}
 
 Vi har desuden lavet en tester for forrige kode, idet vi gerne vil foretage en realisering af koden på DE2-Boardet. Koden for testeren kan ses nedenfor:
@@ -44,7 +43,6 @@ Vi har desuden lavet en tester for forrige kode, idet vi gerne vil foretage en r
           \lstinputlisting{../src/bin2hex_test.vhd}
   }
   \caption{Kode for bin2hex\_test.vhd}	
-  \label{src:TabConTest}
 \end{table}
 
 %\begin{table}[H]
@@ -88,9 +86,9 @@ Fra vores realisering af koden så vi den forventede opførsel af en binær-til-
 
 \pic{rea1}{0.7}{Realisering af bin2hex}{fig:bin2hex}
 
-Hvis vi kigger på RTL-viewer diagrammet of vores struktur, kan ses på Fig.\ref{fig:rtl_bin2hex}, ser vi at den ikke indeholder nogen latches. Dette skyldes formodentligt vores indkludering af et \textit{Others}-statement, der tager forhold for alle de mulige inputs vi ikke specifikt har designeret gennem et \textit{when}-statement. Derfor opbygges struktur blot gennem Muxes.
+Hvis vi kigger på RTL-viewer diagrammet of vores struktur, kan ses på Fig.\ref{fig:rtl_bin2hex1}, ser vi at den ikke indeholder nogen latches. Dette skyldes formodentligt vores indkludering af et \textit{Others}-statement, der tager forhold for alle de mulige inputs vi ikke specifikt har designeret gennem et \textit{when}-statement. Derfor opbygges struktur blot gennem Muxes.
 
-\pic{rtl_case.png}{0.4}{RTL view for bin2hex}{fig:rtl_bin2hex}
+\pic{rtl_case.png}{0.4}{RTL view for bin2hex}{fig:rtl_bin2hex1}
 
 \subsection{Konklusion}
 
